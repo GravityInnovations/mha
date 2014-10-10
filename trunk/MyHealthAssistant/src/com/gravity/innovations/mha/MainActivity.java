@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
 public class MainActivity extends ActionBarActivity implements
 		ActionBar.TabListener {
 
@@ -192,3 +191,4 @@ public class MainActivity extends ActionBarActivity implements
 	}
 
 }
+
