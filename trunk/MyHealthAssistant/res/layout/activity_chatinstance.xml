@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+
+        <TextView
+            android:id="@+id/recivemsg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:text="" />
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="true"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp" >
+
+        <EditText
+            android:id="@+id/sendtext"
+            android:layout_width="0dip"
+            android:layout_height="45dp"
+            android:layout_weight="1" >
+
+            <requestFocus>
+            </requestFocus>
+        </EditText>
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="125dp"
+            android:layout_height="45dp"
+            android:text="Send" >
+        </Button>
+    </LinearLayout>
+
+</LinearLayout>
