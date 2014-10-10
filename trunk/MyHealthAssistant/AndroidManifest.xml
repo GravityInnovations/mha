@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mha.myhealthassistant"
+    package="com.gravity.innovations.mha"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -22,7 +22,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.mha.myhealthassistant.permission.C2D_MESSAGE" />
     <permission
-        android:name="com.mha.myhealthassistant.permission.C2D_MESSAGE"
+        android:name="com.gravity.innovations.mha.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
     
     <application
@@ -61,18 +61,18 @@
         </activity>
         
          <receiver
-            android:name="com.mha.myhealthassistant.GcmBroadcastReceiver"
+            android:name="ccom.gravity.innovations.mha.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
 
                 <!-- Receives the actual messages. -->
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
 
-                <category android:name="com.mha.myhealthassistant" />
+                <category android:name="com.gravity.innovations.mha" />
             </intent-filter>
         </receiver>
         
-         <service android:name="com.mha.myhealthassistant.GcmIntentService" />
+         <service android:name="com.gravity.innovations.mha.GcmIntentService" />
 
         <meta-data
             android:name="com.google.android.gms.version"
