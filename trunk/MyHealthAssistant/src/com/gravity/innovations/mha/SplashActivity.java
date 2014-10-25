@@ -17,6 +17,7 @@ public class SplashActivity extends Activity{
 	public String GCMId;
 	public Boolean RegComp;
 	private Context context;
+	public TextView Loading_text;
     public static final String PROPERTY_REG_ID = "GCMDeviceId";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
@@ -28,6 +29,7 @@ public class SplashActivity extends Activity{
 		
 		setContentView(R.layout.splash);
 		context=getApplicationContext();
+		//Loading_text = (TextView)findViewById(R.id.load);
 		loadAll();
 		//isGoogleServicesAvailable();
 	}
@@ -36,29 +38,45 @@ public class SplashActivity extends Activity{
 	{
 		sp = this.getSharedPreferences("MHASP", MODE_PRIVATE);
 		spe = sp.edit();
+		Loading_text.setText("Checking Internet Coonection");
 		if(hasInternet(this))
 		{
+			Loading_text.setText(sp.getString(PROPERTY_REG_ID, ""));
+			Loading_text.setText("Checking Google Registration");
 			if(sp.getString(PROPERTY_REG_ID, "") != "")
 			{
+				Loading_text.setText("Checking user registration");
 				if(sp.getBoolean("RegComp", false))
 				{
+					
 					Continue();
 				}
 				else
 				{
-					Intent intent = new Intent(this,RegisterUserActivity.class);
+					try{
+					Intent intent = new Intent(SplashActivity.this,SignInActivity.class);
 					intent.putExtra("deviceid", sp.getString(PROPERTY_REG_ID, ""));
 			         startActivity(intent);
 			         finish();
+					}
+					catch(Exception ex){
+						Loading_text.setText(ex.getLocalizedMessage());
+					}
 				}
 			}
 			else{
+				//this is temp if not play services
+				spe.putString(PROPERTY_REG_ID, "ggygygygyuuhu");
+				spe.commit();
+				loadAll();
+				//orignal
 				GCMHelper h=new GCMHelper(context, this);
-				h.execute();
+				//h.execute();
 				
 			}
 		}
 		else{
+			Loading_text.setText("no internet");
 			//make a toast and exit after 3 seconds
 		}
 	}

@@ -6,7 +6,6 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONObject;
 
-import android.R;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -32,18 +31,18 @@ public class RegisterUserActivity extends ActionBarActivity implements OnClickLi
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//setContentView(R.layout);
+		setContentView(R.layout.activity_register);
 		Intent i = getIntent();
 		if (i.hasExtra("deviceid")){
 	          deviceid = i.getStringExtra("deviceid");   
 	    }
 		sp = this.getSharedPreferences("MHASP", MODE_PRIVATE);
 		spe = sp.edit();
-//		user_name = (EditText)findViewById(R.id.username);
-//		password = (EditText)findViewById(R.id.password);
-//		email = (EditText)findViewById(R.id.Email);
-//		signup = (Button)findViewById(R.id.register);
-//		doctor = (RadioButton)findViewById(R.id.doctor);
+		user_name = (EditText)findViewById(R.id.username);
+		password = (EditText)findViewById(R.id.password);
+		email = (EditText)findViewById(R.id.Email);
+		signup = (Button)findViewById(R.id.register);
+		//doctor = (RadioButton)findViewById(R.id.doctor);
 		
 		signup.setOnClickListener(new OnClickListener() {
 			

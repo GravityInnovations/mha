@@ -8,6 +8,13 @@
 
     <string name="started">Pedometer started.</string>
     <string name="stopped">Pedometer stopped.</string>
+    
+    <!-- tabs -->
+    <string name="title_section1">History</string>
+    <string name="title_section2">Chat</string>
+    <string name="title_section3">Pedo</string>
+    <string name="title_section4">Heart Rate</string>
+    
 
     <string name="steps">steps</string>
     <string name="kilometers">kilometers</string>
