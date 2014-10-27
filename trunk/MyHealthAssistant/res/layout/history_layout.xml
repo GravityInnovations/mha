@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+<TextView
+    android:id="@+id/distance"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/speed"
+    android:layout_marginTop="76dp"
+    android:layout_toLeftOf="@+id/bloodpressure"
+    android:hint="distance" />
+
+<TextView
+    android:id="@+id/name"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:hint="name" />
+
+<TextView
+    android:id="@+id/heartrate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/name"
+    android:layout_marginTop="19dp"
+    android:hint="heartrate" />
+
+<TextView
+    android:id="@+id/bloodpressure"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/heartrate"
+    android:layout_marginTop="17dp"
+    android:hint="bloodpressure" />
+
+<TextView
+    android:id="@+id/speed"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/bloodpressure"
+    android:layout_marginTop="30dp"
+    android:hint="speed" />
+
+<TextView
+    android:id="@+id/calories"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/speed"
+    android:layout_marginTop="28dp"
+    android:hint="calories" />
+
+<TextView
+    android:id="@+id/date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/calories"
+    android:layout_marginTop="27dp"
+    android:hint="date" />
+
+<TextView
+    android:id="@+id/time"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_below="@+id/date"
+    android:layout_marginTop="32dp"
+    android:hint="time" />
+
+</RelativeLayout>

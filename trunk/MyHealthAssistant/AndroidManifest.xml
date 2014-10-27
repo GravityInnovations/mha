@@ -33,7 +33,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".SplashActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
            
         </activity>
@@ -74,10 +74,10 @@
            
         </activity>
          <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
-                <action android:name="android.intent.action.SplashActivty" />
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
