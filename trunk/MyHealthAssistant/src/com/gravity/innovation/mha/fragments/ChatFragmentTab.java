@@ -24,8 +24,8 @@ import android.support.v4.app.Fragment;
 import com.gravity.innovations.mha.ChatInsatanceActivity;
 import com.gravity.innovations.mha.Common;
 import com.gravity.innovations.mha.HttpTask;
-import com.gravity.innovations.mha.MainActivity;
 import com.gravity.innovations.mha.R;
+
  
  
 
@@ -120,6 +120,7 @@ public class ChatFragmentTab extends Fragment implements  Common.Callbacks.HttpC
 		case 2:
 			//if response is success
 			//start chat instance activity and push old data to chat
+
 			if (RequestCode == 2 && ResultCode==Common.HTTP_RESPONSE_OK){
 				Intent intent = new Intent(getActivity(),ChatInsatanceActivity.class);
 		        intent.putExtra("chatobj", data.toString());

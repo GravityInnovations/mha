@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,7 +26,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class ChatInsatanceActivity extends ActionBarActivity implements Common.Callbacks.HttpCallback,OnClickListener {
-	
+	TextView recive_msg;
 	EditText send_msg;
 	Button send;
 	//TextView chatwith;
@@ -50,6 +51,7 @@ public class ChatInsatanceActivity extends ActionBarActivity implements Common.C
 			e.printStackTrace();
 		}
 		setmsg();
+		// get extra data got from server > ref: chat activity http result case 2
 		// get extra data got from server > ref: chat activity http result case 2
 		sp = this.getSharedPreferences("MHASP", MODE_PRIVATE);
 		spe = sp.edit();
