@@ -77,6 +77,7 @@ public class MainActivity extends ActionBarActivity implements
 		historyFragmentTab = new HistoryFragmentTab();
 		historyFragmentTab.SetUp(this);
 		chatFragmentTab = new ChatFragmentTab();
+		chatFragmentTab.setUp(this);
 		pedoFragmentTab = new PedoFragmentTab();
 		heartrateFragmentTab = new HeartrateFragmentTab();
 		searchFragmentTab = new SearchFragmentTab();

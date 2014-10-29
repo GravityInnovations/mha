@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,7 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ChatInsatanceActivity extends ActionBarActivity implements OnClickListener {
+public class ChatInsatanceActivity extends ActionBarActivity implements Common.Callbacks.HttpCallback,OnClickListener {
 	TextView recive_msg;
 	EditText send_msg;
 	Button send;
@@ -30,13 +31,14 @@ public class ChatInsatanceActivity extends ActionBarActivity implements OnClickL
 	List<NameValuePair> postData = new ArrayList<NameValuePair>();
 	public SharedPreferences sp;
 	public SharedPreferences.Editor spe;
-	
+	public boolean flag = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_chatinstance);
 		Intent i = getIntent();
+		// get extra data got from server > ref: chat activity http result case 2
 		if (i.hasExtra("username")){
 	          value = i.getStringExtra("username");   
 	    }
@@ -53,14 +55,18 @@ public class ChatInsatanceActivity extends ActionBarActivity implements OnClickL
 		}
 		
 		a = (Activity)this;
+		
 		send.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
+				String url = "";
+				
+					url = "http://mha.gravityinv.com/sendMessage.php";
 				// TODO Auto-generated method stub
 				postData.add(new BasicNameValuePair("reply", send_msg.getText().toString()));
 				postData.add(new BasicNameValuePair("name_sender", sp.getString(Common.USER_NAME, "")));
-				HttpTask Temp = new HttpTask(a, "http://mha.gravityinv.com/insertingrply.php", postData,Common.HttpMethod.HttpPost,1);
+				HttpTask Temp = new HttpTask(a, url, postData,Common.HttpMethod.HttpPost,1);
 				Temp.execute();
 			}
 		});
@@ -93,5 +99,7 @@ public class ChatInsatanceActivity extends ActionBarActivity implements OnClickL
 		// TODO Auto-generated method stub
 		
 	}
-
+	public void httpResult(JSONObject data, int RequestCode, int ResultCode) {
+		
+		}
 }
