@@ -16,6 +16,9 @@ import java.util.Locale;
 
 
 
+
+import org.json.JSONObject;
+
 import com.gravity.innovations.mha.ChatActivity;
 import com.gravity.innovations.mha.MainActivity;
 import com.gravity.innovations.mha.R;
@@ -39,11 +42,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class MainActivity extends ActionBarActivity implements
-		ActionBar.TabListener {
+		ActionBar.TabListener, Common.Callbacks.HttpCallback {
 	HistoryFragmentTab historyFragmentTab;// = new HistoryFragmentTab();
 	ChatFragmentTab chatFragmentTab;// = new ChatFragmentTab();
 	PedoFragmentTab pedoFragmentTab;// = new PedoFragmentTab();
 	HeartrateFragmentTab heartrateFragmentTab;// = new HeartrateFragmentTab();
+	SearchFragmentTab searchFragmentTab;
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -67,12 +71,15 @@ public class MainActivity extends ActionBarActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		super.onCreate(savedInstanceState);
-		try{
 		setContentView(R.layout.activity_main);
+		try{
+		
 		historyFragmentTab = new HistoryFragmentTab();
+		historyFragmentTab.SetUp(this);
 		chatFragmentTab = new ChatFragmentTab();
 		pedoFragmentTab = new PedoFragmentTab();
 		heartrateFragmentTab = new HeartrateFragmentTab();
+		searchFragmentTab = new SearchFragmentTab();
 		// Set up the action bar.
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
@@ -179,11 +186,13 @@ public class MainActivity extends ActionBarActivity implements
 			case 0:
 				return (Fragment)historyFragmentTab;
 			case 1:
-				return (Fragment)pedoFragmentTab;
-			case 2:
-				return (Fragment)heartrateFragmentTab;
-			case 3:
 				return (Fragment)chatFragmentTab;
+			case 2:
+				return (Fragment)pedoFragmentTab;
+			case 3:
+				return (Fragment)heartrateFragmentTab;
+			case 4:
+				return (Fragment)searchFragmentTab;
 			}
 			
 			return PlaceholderFragment.newInstance(position + 1);
@@ -192,7 +201,7 @@ public class MainActivity extends ActionBarActivity implements
 		@Override
 		public int getCount() {
 			// Show 4 total pages.
-			return 4;
+			return 5;
 		}
 
 		@Override
@@ -207,6 +216,8 @@ public class MainActivity extends ActionBarActivity implements
 				return getString(R.string.title_section3).toUpperCase(l);
 			case 3:
 				return getString(R.string.title_section4).toUpperCase(l);
+			case 4:
+				return getString(R.string.title_section5).toUpperCase(l);
 			}
 			return null;
 		}
@@ -246,6 +257,17 @@ public class MainActivity extends ActionBarActivity implements
 			textView.setText(Integer.toString(getArguments().getInt(
 					ARG_SECTION_NUMBER)));
 			return rootView;
+		}
+	}
+
+	@Override
+	public void httpResult(JSONObject data, int RequestCode, int ResultCode) {
+		switch(RequestCode)
+		{
+		case 1:
+			if(ResultCode == 0)
+			historyFragmentTab.pushdata(data);
+			break;
 		}
 	}
 

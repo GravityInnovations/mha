@@ -63,7 +63,7 @@
         </activity>
          
          <activity
-            android:name=".SignInAcitivity"
+            android:name=".SignInActivity"
             android:label="@string/app_name" >
            
         </activity>

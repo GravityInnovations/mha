@@ -29,7 +29,7 @@ public class SplashActivity extends Activity{
 		
 		setContentView(R.layout.splash);
 		context=getApplicationContext();
-		//Loading_text = (TextView)findViewById(R.id.load);
+		Loading_text = (TextView)findViewById(R.id.load);
 		loadAll();
 		//isGoogleServicesAvailable();
 	}

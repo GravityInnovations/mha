@@ -2,12 +2,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
- 
+
     <TextView
+        android:id="@+id/textViewX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="29dp"
+        android:text="X axis" />
+
+    <TextView
+        android:id="@+id/textViewy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewz"
+        android:layout_marginTop="39dp"
+        android:text="Y axis" />
+
+    <TextView
+        android:id="@+id/textViewz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textSteps"
+        android:layout_marginTop="27dp"
+        android:text="z axis" />
+
+    <TextView
+        android:id="@+id/textSensitive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewy"
+        android:layout_marginTop="35dp"
+        android:text="sensitive" />
+
+    <TextView
+        android:id="@+id/textSteps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textViewX"
+        android:layout_marginTop="19dp"
+        android:text="steps" />
+
+    <Button
+        android:id="@+id/buttnReset"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textSensitive"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Yes" />
+        android:layout_marginTop="49dp"
+        android:text="reset" />
  
 </RelativeLayout>
