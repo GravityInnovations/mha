@@ -40,6 +40,7 @@ public class ChatFragmentTab extends Fragment implements  Common.Callbacks.HttpC
 	 View rootView;
 	 ListView user_list;
 	 Context mContext;
+	 String userId1;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -47,7 +48,8 @@ public class ChatFragmentTab extends Fragment implements  Common.Callbacks.HttpC
         //ArrayAdapter<String> user_adapter = new ArrayAdapter<String> (this, android.R.layout.simple_list_item_1, user);
 		//ArrayAdapter<String> user_adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, user); 
         user_list = (ListView)rootView.findViewById(R.id.doctorslist);
-        
+        HttpTask Temp = new HttpTask((Activity)getActivity(), "http://mha.gravityinv.com/get_patients.php", null, Common.HttpMethod.HttpGet, 3);
+		Temp.execute();
 //		 user_list.setAdapter(user_adapter);
 //		 user_list.setOnItemClickListener(new OnItemClickListener() {
 //
@@ -61,11 +63,11 @@ public class ChatFragmentTab extends Fragment implements  Common.Callbacks.HttpC
         
         return rootView;
     }
-    public void setUp(Context mContext)
+    public void setUp(Context mContext, String UserId)
     {
     	this.mContext = mContext;
-    	HttpTask Temp = new HttpTask((Activity)getActivity(), "http://mha.gravityinv.com/get_patient.php", null, Common.HttpMethod.HttpGet, 1);
-		Temp.execute();
+    	this.userId1 = UserId;
+    	
     }
     public void onItemzero(String  name) {
     	
@@ -81,15 +83,15 @@ public class ChatFragmentTab extends Fragment implements  Common.Callbacks.HttpC
 	public void httpResult(JSONObject data, int RequestCode, int ResultCode) {
 		switch(RequestCode)
 		{
-		case 1:
+		case 3:
 			ArrayList<String> users = new ArrayList<String>();
-			JSONArray a;
+			JSONArray a = null;
 			try {
 				a = data.getJSONArray("data");
 			
 				for(int i=0; i< a.length();i++)
 				{
-					users.add(((JSONObject)a.get(i)).getString("email"));
+					users.add(((JSONObject)a.get(i)).getString("username"));//username
 					
 				}
 			
@@ -101,13 +103,27 @@ public class ChatFragmentTab extends Fragment implements  Common.Callbacks.HttpC
 			(mContext, android.R.layout.simple_list_item_1, users);
 			 //ListView user_list = (ListView)findViewById(R.id.doctorslist);
 			 user_list.setAdapter(user_adapter);
+			 final JSONArray x = a;
 			 user_list.setOnItemClickListener(new OnItemClickListener() {
 
 				 public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
 				 {
 					 String name=(String)arg0.getItemAtPosition(position);
-					 HttpTask Temp = new HttpTask((Activity)getActivity(), "http://mha.gravityinv.com/getChat.php", null, Common.HttpMethod.HttpGet, 2);
-						Temp.execute();
+					 for(int i=0; i< x.length();i++)
+						{
+							 try {
+								 String uname = ((JSONObject)x.get(i)).getString("username");
+								 if(uname.equals(name)){
+								String userId2 = ((JSONObject)x.get(i)).getString("userId");
+								HttpTask Temp = new HttpTask((Activity)getActivity(), "http://mha.gravityinv.com/getChat.php?u_id1="+userId1+"&u_id2="+userId2, null, Common.HttpMethod.HttpGet, 2);
+								Temp.execute();
+								 }
+							} catch (JSONException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					 
 					 
 					 
 					 

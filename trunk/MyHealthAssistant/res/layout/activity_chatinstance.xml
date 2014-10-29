@@ -1,62 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:layout_height="fill_parent">
+		  
+ <EditText
+     android:id="@+id/sendtext"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content" >
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" >
-        <LinearLayout
-            android:layout_width="fill_parent"
-    		android:layout_height="wrap_content"
-    		android:orientation="horizontal"
-    		android:weightSum="2" >
-		<ListView 
-		    android:id="@+id/senderlist"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-		    ></ListView>
-		    <ListView 
-		    android:id="@+id/reciverlist"
-		    android:layout_width="fill_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_weight="1"
-
-		    ></ListView>
-		
-		
-       </LinearLayout>
-    </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:baselineAligned="true"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" >
-
-        <EditText
-            android:id="@+id/sendtext"
-            android:layout_width="0dip"
-            android:layout_height="45dp"
-            android:layout_weight="1" >
-
-            <requestFocus>
-            </requestFocus>
         </EditText>
 
         <Button
             android:id="@+id/send"
-            android:layout_width="125dp"
-            android:layout_height="45dp"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/chat"
+            android:layout_height="wrap_content"
             android:text="Send" >
         </Button>
-    </LinearLayout>
 
-</LinearLayout>
+        <ListView
+            android:id="@+id/chat"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true" >
+        </ListView>
+
+</RelativeLayout>
+
+
+
+<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" -->
+<!--     android:layout_width="fill_parent" -->
+<!--     android:layout_height="fill_parent"> -->
+
+<!--         <ListView -->
+<!--             android:layout_alignParentTop="true" -->
+            
+<!--             android:id="@+id/chat" -->
+<!--             android:layout_width="fill_parent" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:layout_above="@+id/send" > -->
+<!-- </ListView> -->
+		  
+<!--  <EditText -->
+<!--      android:id="@+id/sendtext" -->
+<!--      android:layout_width="wrap_content" -->
+<!--      android:layout_height="wrap_content" -->
+<!--      android:layout_alignParentBottom="true" -->
+<!--      android:layout_alignParentLeft="true" -->
+<!--      android:layout_toLeftOf="@+id/send" > -->
+
+<!--         </EditText> -->
+
+<!--         <Button -->
+<!--             android:layout_alignParentBottom="true" -->
+<!--             android:layout_alignParentRight="true" -->
+<!--             android:id="@+id/send" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:text="Send" > -->
+<!--         </Button> -->
+
+<!-- </RelativeLayout> -->

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -81,6 +82,16 @@ public class SignInActivity extends ActionBarActivity implements  Common.Callbac
 		// TODO Auto-generated method stub
 		if (RequestCode == 1 && ResultCode==Common.HTTP_RESPONSE_OK){
 			spe.putBoolean("RegComp", true);
+			//same as reg with sp
+			try {
+				String userId = data.getString("userId");
+				spe.putString("userid", userId );
+				spe.putString("email", data.getString("email"));
+				spe.putString("username", data.getString("username"));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			spe.commit();
 			Intent intent = new Intent(this,MainActivity.class);
 	        startActivity(intent);

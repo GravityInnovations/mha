@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -50,7 +51,7 @@ public class ChatInsatanceActivity extends ActionBarActivity implements Common.C
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		setmsg();
+		setmsg(obj);
 		// get extra data got from server > ref: chat activity http result case 2
 		// get extra data got from server > ref: chat activity http result case 2
 		sp = this.getSharedPreferences("MHASP", MODE_PRIVATE);
@@ -79,17 +80,28 @@ public class ChatInsatanceActivity extends ActionBarActivity implements Common.C
 		
 		
 	}
-public void setmsg()
+public void setmsg(JSONObject data)
 {
+	ArrayList<String> chatData = new ArrayList<>();
+	JSONArray a = null;
+	try {
+		a = data.getJSONArray("data");
+	
+		for(int i=0; i< a.length();i++)
+		{
+			chatData.add(((JSONObject)a.get(i)).getString("message"));//username
+			
+		}
+	
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 	ArrayAdapter<String> sender_adapter = new ArrayAdapter<String>
-	(this, R.layout.sender_row, tempdata);
-	 ListView sender_list = (ListView)findViewById(R.id.senderlist);
+	(this, android.R.layout.simple_list_item_1, chatData);
+	 ListView sender_list = (ListView)findViewById(R.id.chat);
 	 sender_list.setAdapter(sender_adapter);
-	 
-	 ArrayAdapter<String> reciver_adapter = new ArrayAdapter<String>
-		(this, R.layout.reciver_row, tempdata2);
-		 ListView reciver_list = (ListView)findViewById(R.id.reciverlist);
-		 reciver_list.setAdapter(reciver_adapter);
+	
 }
 
 

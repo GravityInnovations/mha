@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Intent;
@@ -83,6 +84,16 @@ public class RegisterUserActivity extends ActionBarActivity implements OnClickLi
 	public void httpResult(JSONObject data, int RequestCode, int ResultCode) {
 		if (RequestCode == Common.HTTP_RESPONSE_OK){
 		spe.putBoolean("RegComp", true);
+		//save userid, username and email in prefs
+		try {
+			spe.putString("userid", data.getString("userId"));
+			spe.putString("email", data.getString("email"));
+			spe.putString("username", data.getString("username"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		spe.commit();
 		Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
