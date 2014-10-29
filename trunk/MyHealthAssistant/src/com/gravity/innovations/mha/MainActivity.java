@@ -1,16 +1,12 @@
 package com.gravity.innovations.mha;
-//import com.gravity.innovation.mha.fragments.*;
-//import com.example.fragment_tab.HeartrateFragmentTab;
-//import com.example.fragment_tab.HistoryFragmentTab;
-//import com.example.fragment_tab.PedoFragmentTab;
 
-//import com.gravity.inovation.MainActivity.SectionsPagerAdapter;
 import com.gravity.innovation.mha.fragments.ChatFragmentTab;
 import com.gravity.innovation.mha.fragments.HistoryFragmentTab;
 import com.gravity.innovation.mha.fragments.PedoFragmentTab;
 import com.gravity.innovation.mha.fragments.HeartrateFragmentTab;
 
 import java.util.Locale;
+
 
 
 
@@ -29,6 +25,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -48,7 +45,10 @@ public class MainActivity extends ActionBarActivity implements
 	PedoFragmentTab pedoFragmentTab;// = new PedoFragmentTab();
 	HeartrateFragmentTab heartrateFragmentTab;// = new HeartrateFragmentTab();
 	SearchFragmentTab searchFragmentTab;
-
+	HeartrateFragmentTab mc= new HeartrateFragmentTab();
+	int HR=102;
+	String s="03445008891";
+	String m="patient is critical";
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the sections. We use a {@link FragmentPagerAdapter}
@@ -190,7 +190,7 @@ public class MainActivity extends ActionBarActivity implements
 			case 2:
 				return (Fragment)pedoFragmentTab;
 			case 3:
-				return (Fragment)heartrateFragmentTab;
+			    return (Fragment)heartrateFragmentTab;
 			case 4:
 				return (Fragment)searchFragmentTab;
 			}
@@ -258,8 +258,7 @@ public class MainActivity extends ActionBarActivity implements
 					ARG_SECTION_NUMBER)));
 			return rootView;
 		}
-	}
-
+	}	
 	@Override
 	public void httpResult(JSONObject data, int RequestCode, int ResultCode) {
 		switch(RequestCode)
