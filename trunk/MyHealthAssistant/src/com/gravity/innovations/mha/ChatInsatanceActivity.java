@@ -78,12 +78,16 @@ public class ChatInsatanceActivity extends ActionBarActivity implements Common.C
 				postData.add(new BasicNameValuePair("c_id", conversationId));
 				HttpTask Temp = new HttpTask(a, url, postData,Common.HttpMethod.HttpPost,1);
 				Temp.execute();
+				sender_adapter.add(send_msg.getText().toString());
+				sender_adapter.notifyDataSetChanged();
+				send_msg.setText("");
 			}
 		});
 		
 		
 		
 	}
+	ArrayAdapter<String> sender_adapter;
 public void setmsg(JSONObject data)
 {
 	ArrayList<String> chatData = new ArrayList<>();
@@ -102,7 +106,7 @@ public void setmsg(JSONObject data)
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	ArrayAdapter<String> sender_adapter = new ArrayAdapter<String>
+	sender_adapter = new ArrayAdapter<String>
 	(this, android.R.layout.simple_list_item_1, chatData);
 	try{ ListView sender_list = (ListView)findViewById(R.id.chat1);
 	 sender_list.setAdapter(sender_adapter);
