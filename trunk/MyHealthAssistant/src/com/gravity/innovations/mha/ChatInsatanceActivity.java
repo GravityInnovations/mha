@@ -11,6 +11,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.google.android.gms.internal.cn;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,6 +35,7 @@ public class ChatInsatanceActivity extends ActionBarActivity implements Common.C
 	//TextView chatwith;
 	String value;
 	Activity a;
+	public String conversationId;
 	List<NameValuePair> postData = new ArrayList<NameValuePair>();
 	public SharedPreferences sp;
 	public SharedPreferences.Editor spe;
@@ -71,7 +74,8 @@ public class ChatInsatanceActivity extends ActionBarActivity implements Common.C
 					url = "http://mha.gravityinv.com/sendMessage.php";
 				// TODO Auto-generated method stub
 				postData.add(new BasicNameValuePair("reply", send_msg.getText().toString()));
-				postData.add(new BasicNameValuePair("name_sender", sp.getString(Common.USER_NAME, "")));
+				postData.add(new BasicNameValuePair("u_id", sp.getString("userid", "")));
+				postData.add(new BasicNameValuePair("c_id", conversationId));
 				HttpTask Temp = new HttpTask(a, url, postData,Common.HttpMethod.HttpPost,1);
 				Temp.execute();
 			}
@@ -85,6 +89,7 @@ public void setmsg(JSONObject data)
 	ArrayList<String> chatData = new ArrayList<>();
 	JSONArray a = null;
 	try {
+		conversationId = data.getString("c_id");
 		a = data.getJSONArray("data");
 	
 		for(int i=0; i< a.length();i++)
@@ -99,9 +104,13 @@ public void setmsg(JSONObject data)
 	}
 	ArrayAdapter<String> sender_adapter = new ArrayAdapter<String>
 	(this, android.R.layout.simple_list_item_1, chatData);
-	 ListView sender_list = (ListView)findViewById(R.id.chat);
+	try{ ListView sender_list = (ListView)findViewById(R.id.chat1);
 	 sender_list.setAdapter(sender_adapter);
-	
+	}
+	catch(Exception ex)
+	{
+		String x = ex.getLocalizedMessage();
+	}
 }
 
 

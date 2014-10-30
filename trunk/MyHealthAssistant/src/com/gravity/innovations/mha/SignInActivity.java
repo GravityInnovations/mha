@@ -8,6 +8,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,11 +27,12 @@ public class SignInActivity extends ActionBarActivity implements  Common.Callbac
 	Button signin;
 	public SharedPreferences sp;
 	public SharedPreferences.Editor spe;
-
+	Context mContext;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mContext = getApplicationContext();
 		setContentView(R.layout.activity_signin);
 		Intent i = getIntent();
 		sp = this.getSharedPreferences("MHASP", MODE_PRIVATE);
@@ -47,7 +49,9 @@ public class SignInActivity extends ActionBarActivity implements  Common.Callbac
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				signup();
+				
+					signup();
+				
 			}
 		});
 		signin.setOnClickListener(new OnClickListener() {
@@ -55,7 +59,15 @@ public class SignInActivity extends ActionBarActivity implements  Common.Callbac
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if (user_name.getText().toString().isEmpty() && password.getText().toString().isEmpty() ){
+					Toast.makeText(mContext, "Both Fields Empty", Toast.LENGTH_SHORT).show();
+				}else if (password.getText().toString().isEmpty()){
+					Toast.makeText(mContext, "Password Field is Empty", Toast.LENGTH_SHORT).show();
+				}else if (user_name.getText().toString().isEmpty()){
+					Toast.makeText(mContext, "Username Field is Empty", Toast.LENGTH_SHORT).show();
+				} else{
 				signin();
+				}
 			}
 		});
 

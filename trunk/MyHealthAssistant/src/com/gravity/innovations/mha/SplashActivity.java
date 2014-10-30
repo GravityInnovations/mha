@@ -9,7 +9,9 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SplashActivity extends Activity{
 	public SharedPreferences sp;
@@ -36,15 +38,20 @@ public class SplashActivity extends Activity{
 	
 	public void loadAll()
 	{
+		try{
 		sp = this.getSharedPreferences("MHASP", MODE_PRIVATE);
 		spe = sp.edit();
 		Loading_text.setText("Checking Internet Coonection");
-		if(hasInternet(this))
+		if(hasInternet(this) == false && isGoogleServicesAvailable() == false && isDeviceConnected() == false )
+		{
+			Toast.makeText(this, "play services are not avialable", Toast.LENGTH_SHORT).show();
+		}else if(hasInternet(this) && isGoogleServicesAvailable() == true && isDeviceConnected() == true )
 		{
 			Loading_text.setText(sp.getString(PROPERTY_REG_ID, ""));
 			Loading_text.setText("Checking Google Registration");
 			if(sp.getString(PROPERTY_REG_ID, "") != "")
 			{
+				Log.e("LoadAll",sp.getString(PROPERTY_REG_ID, null));
 				Loading_text.setText("Checking user registration");
 				if(sp.getBoolean("RegComp", false))
 				{
@@ -53,9 +60,10 @@ public class SplashActivity extends Activity{
 				}
 				else
 				{
+					
 					try{
 					Intent intent = new Intent(SplashActivity.this,SignInActivity.class);
-					intent.putExtra("deviceid", sp.getString(PROPERTY_REG_ID, ""));
+					intent.putExtra("deviceid", sp.getString(PROPERTY_REG_ID, null));
 			         startActivity(intent);
 			         finish();
 					}
@@ -66,12 +74,12 @@ public class SplashActivity extends Activity{
 			}
 			else{
 				//this is temp if not play services
-				spe.putString(PROPERTY_REG_ID, "ggygygygyuuhu");
-				spe.commit();
-				loadAll();
+				 //spe.putString(PROPERTY_REG_ID, "");
+			//spe.commit();
+				//loadAll();
 				//orignal
 				GCMHelper h=new GCMHelper(context, this);
-				//h.execute();
+				h.execute();
 				
 			}
 		}
@@ -79,7 +87,8 @@ public class SplashActivity extends Activity{
 			Loading_text.setText("no internet");
 			//make a toast and exit after 3 seconds
 		}
-	}
+		}catch(Exception e){Log.e("LoadAll","Error MAinActivity");}
+		}
 	
 	public void Continue()
 	{

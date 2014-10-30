@@ -7,6 +7,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -28,10 +29,12 @@ public class RegisterUserActivity extends ActionBarActivity implements OnClickLi
 	String deviceid;
 	public SharedPreferences sp;
 	public SharedPreferences.Editor spe;
+	Context mContext;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mContext = getApplicationContext();
 		setContentView(R.layout.activity_register);
 		Intent i = getIntent();
 		if (i.hasExtra("deviceid")){
@@ -39,7 +42,10 @@ public class RegisterUserActivity extends ActionBarActivity implements OnClickLi
 	    }
 		sp = this.getSharedPreferences("MHASP", MODE_PRIVATE);
 		spe = sp.edit();
+		//doctor = (RadioButton)findViewById(R.id.isdoctor);
 		user_name = (EditText)findViewById(R.id.username);
+		RadioGroup isdoctor = (RadioGroup)findViewById(R.id.isdoctor);
+	
 		password = (EditText)findViewById(R.id.password);
 		email = (EditText)findViewById(R.id.Email);
 		signup = (Button)findViewById(R.id.register);
@@ -50,18 +56,33 @@ public class RegisterUserActivity extends ActionBarActivity implements OnClickLi
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				register();
+		 
+				if (user_name.getText().toString().isEmpty() && password.getText().toString().isEmpty() && email.getText().toString().isEmpty()){
+					Toast.makeText(mContext, "All Fields Empty", Toast.LENGTH_SHORT).show();
+				}else if (password.getText().toString().isEmpty()){
+					Toast.makeText(mContext, "Password Field is Empty", Toast.LENGTH_SHORT).show();
+				}else if (user_name.getText().toString().isEmpty()){
+					Toast.makeText(mContext, "Username Field is Empty", Toast.LENGTH_SHORT).show();
+				}else if (email.getText().toString().isEmpty()){
+					Toast.makeText(mContext, "Email Field is Empty", Toast.LENGTH_SHORT).show();
+				}else{
+					register( );
+				}
 			}
 		});
 		
 	}
-	public void register(){
+	public void register( ){
 		List<NameValuePair> postData = new ArrayList<NameValuePair>();
-		postData.add(new BasicNameValuePair("name", user_name.getText().toString()));
-		postData.add(new BasicNameValuePair("password", password.getText().toString()));
-		postData.add(new BasicNameValuePair("email", email.getText().toString()));
-		//RadioGroup isdoctor = (RadioGroup)findViewById(r);
-		//postData.add(new BasicNameValuePair("isdoctor", doctor.getText().toString()));
+		postData.add(new BasicNameValuePair("username",   user_name.getText().toString()/**/ ));
+		postData.add(new BasicNameValuePair("password",     password.getText().toString()/**/));
+		postData.add(new BasicNameValuePair("email",     email.getText().toString() /**/));
+//		String isDoc = doctor.getText().toString();
+		
+//		if(isDoc.toLowerCase() == "doctor")
+//		postData.add(new BasicNameValuePair("isdoctor", "1" ));
+//		else 
+		postData.add(new BasicNameValuePair("isdoctor", "0" ));
 		postData.add(new BasicNameValuePair("device_id", deviceid));
 //		//add or edit
 //		if(tasklist.gravity_id != ""){
@@ -71,7 +92,7 @@ public class RegisterUserActivity extends ActionBarActivity implements OnClickLi
 //		else
 //			postData.add(new BasicNameValuePair("action", "add"));
 //		postData.add(new BasicNameValuePair("title", tasklist.title));
-		HttpTask Temp = new HttpTask(this, "http://mha.gravityinv.com/signup.php", postData,Common.HttpMethod.HttpPost,
+		HttpTask Temp = new HttpTask(this, "http://mha.gravityinv.com/signup.php", postData, Common.HttpMethod.HttpPost,
 				1);
 		Temp.execute();
 	}
@@ -82,7 +103,7 @@ public class RegisterUserActivity extends ActionBarActivity implements OnClickLi
 	}
 	@Override
 	public void httpResult(JSONObject data, int RequestCode, int ResultCode) {
-		if (RequestCode == Common.HTTP_RESPONSE_OK){
+		if (ResultCode == Common.HTTP_RESPONSE_OK){
 		spe.putBoolean("RegComp", true);
 		//save userid, username and email in prefs
 		try {

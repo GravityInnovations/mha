@@ -3,29 +3,39 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 		  
- <EditText
+       
+ 
+
+   
+ <ListView
+      android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/send"
+            android:layout_toEndOf="@+id/send"
+            android:id="@+id/chat1"
+            android:background="#ccc"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true">
+
+        </ListView>
+           
+<EditText
      android:id="@+id/sendtext"
      android:layout_width="wrap_content"
-     android:layout_height="wrap_content" >
-
+     android:layout_height="wrap_content" 
+     android:layout_alignParentLeft="true"
+     android:layout_toLeftOf="@+id/send"
+     android:layout_alignParentBottom="true" android:hint="message">
         </EditText>
 
         <Button
             android:id="@+id/send"
+            android:layout_alignParentBottom="true"
             android:layout_width="wrap_content"
-            android:layout_below="@+id/chat"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:text="Send" >
         </Button>
-
-        <ListView
-            android:id="@+id/chat"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true" >
-        </ListView>
-
 </RelativeLayout>
 
 

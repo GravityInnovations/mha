@@ -32,10 +32,15 @@ public class GCMHelper extends AsyncTask<Void,Void,Void>
     public Editor editor;
     public static final String PROPERTY_REG_ID = "GCMDeviceId";
     public SplashActivity ac;
+    public SharedPreferences sp;
+	public SharedPreferences.Editor spe;
     //constructor....
-    
+	
     public GCMHelper(Context context, SplashActivity a)
     {
+    	sp = a.getSharedPreferences("MHASP", 0);
+    	spe = sp.edit();
+    		
     	ac = a;
     	this.mContext=context;
     	getGCMId =mContext.getSharedPreferences("MHASP", 0); // 0 - for private mode
@@ -84,28 +89,32 @@ public class GCMHelper extends AsyncTask<Void,Void,Void>
 	
 	private void sendRegistrationIdToBackend(String regid) 
 	{
-
-		String url = "http://mha.gravityinv.com/signup.php?";
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("regid", regid));
-       DefaultHttpClient httpClient = new DefaultHttpClient();
-        HttpPost httpPost = new HttpPost(url);
-        try {
-			httpPost.setEntity(new UrlEncodedFormEntity(params));
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-
-        try {
-			HttpResponse httpResponse = httpClient.execute(httpPost);
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}         
+		
+		spe.putString("GCMDeviceId", regid);
+		spe.commit();
+		
+		
+//		String url = "http://mha.gravityinv.com/signup.php?";
+//		List<NameValuePair> params = new ArrayList<NameValuePair>();
+//        params.add(new BasicNameValuePair("regid", regid));
+//       DefaultHttpClient httpClient = new DefaultHttpClient();
+//        HttpPost httpPost = new HttpPost(url);
+//        try {
+//			httpPost.setEntity(new UrlEncodedFormEntity(params));
+//		} catch (UnsupportedEncodingException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//
+//        try {
+//			HttpResponse httpResponse = httpClient.execute(httpPost);
+//		} catch (ClientProtocolException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}         
 
 	}//End of method sendRegistrationIdToBackend.....
 
